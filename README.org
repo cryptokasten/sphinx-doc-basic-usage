@@ -1,0 +1,141 @@
+#+TITLE: Sphinx-doc basic usage
+#+DESCRIPTION: Creating a basic static documentation site using sphinx-doc.
+#+PROPERTY: header-args:python :session *shell sphinx-doc-basic-usage python* :results silent raw
+#+PROPERTY: header-args:sh :session *shell sphinx-doc-basic-usage sh* :results silent raw
+#+OPTIONS: ^:nil
+
+#+BEGIN_QUOTE
+Creating a basic static documentation site using sphinx-doc.
+#+END_QUOTE
+
+** Sphinx install
+
+#+BEGIN_SRC sh
+pip install sphinx
+#+END_SRC
+
+** Initialize sphinx directory
+
+Run initialize master.
+
+#+BEGIN_SRC sh
+sphinx-quickstart demo_site
+#+END_SRC
+
+Answer the questions.
+
+#+BEGIN_EXAMPLE
+Welcome to the Sphinx 2.2.0 quickstart utility.
+
+Please enter values for the following settings (just press Enter to
+accept a default value, if one is given in brackets).
+
+Selected root path: demo_site
+
+You have two options for placing the build directory for Sphinx output.
+Either, you use a directory "_build" within the root path, or you separate
+"source" and "build" directories within the root path.
+> Separate source and build directories (y/n) [n]: n
+
+The project name will occur in several places in the built documentation.
+> Project name: Demo sphinx site
+> Author name(s): Bob
+> Project release []: 
+
+If the documents are to be written in a language other than English,
+you can select a language here by its language code. Sphinx will then
+translate text that it generates into that language.
+
+For a list of supported codes, see
+https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language.
+> Project language [en]: 
+
+Creating file demo_site/conf.py.
+Creating file demo_site/index.rst.
+Creating file demo_site/Makefile.
+Creating file demo_site/make.bat.
+
+Finished: An initial directory structure has been created.
+
+You should now populate your master file demo_site/index.rst and create other documentation
+source files. Use the Makefile to build the docs, like so:
+   make builder
+where "builder" is one of the supported builders, e.g. html, latex or linkcheck.
+#+END_EXAMPLE
+
+The following files will be create in the directory =demo_site=:
+
+- =Makefile=, =make.bat= -- service files for build;
+
+- =_build= -- directory for build results;
+
+- =_static= -- directory for static files;
+
+- =_templates= -- directory for templates;
+
+- =conf.py= -- sphinx config file;
+
+- =index.rst= -- content main files.
+
+** Content
+
+More examples in [[https://www.sphinx-doc.org/en/master/usage/quickstart.html][docs]].
+
+*** Index page
+
+#+BEGIN_SRC rst :tangle demo_site/index.rst
+Main page of demo site
+======================
+
+Hello, World!
+
+.. toctree::
+   :glob:
+
+   pages/*
+#+END_SRC
+
+*** Subpage
+
+#+BEGIN_SRC rst :tangle demo_site/pages/1.rst
+Page one
+========
+
+Page one.
+#+END_SRC
+
+#+BEGIN_SRC rst :tangle demo_site/pages/2.rst
+Page two
+========
+
+Page two.
+#+END_SRC
+
+
+** Build results
+
+#+BEGIN_SRC sh
+cd demo_site
+#+END_SRC
+
+View available formats.
+
+#+BEGIN_SRC sh
+make
+#+END_SRC
+
+*** Build html
+
+#+BEGIN_SRC sh
+make html
+#+END_SRC
+
+*** Build epub
+
+#+BEGIN_SRC sh
+make epub
+#+END_SRC
+
+** Resources
+
+- https://www.sphinx-doc.org/en/master/usage/quickstart.html
